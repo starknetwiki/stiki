@@ -1,0 +1,212 @@
+[
+    {
+        "members": [
+            {
+                "name": "low",
+                "offset": 0,
+                "type": "felt"
+            },
+            {
+                "name": "high",
+                "offset": 1,
+                "type": "felt"
+            }
+        ],
+        "name": "Uint256",
+        "size": 2,
+        "type": "struct"
+    },
+    {
+        "members": [
+            {
+                "name": "stiki_hash",
+                "offset": 0,
+                "type": "Uint256"
+            },
+            {
+                "name": "n_upvotes",
+                "offset": 2,
+                "type": "felt"
+            },
+            {
+                "name": "n_downvotes",
+                "offset": 3,
+                "type": "felt"
+            }
+        ],
+        "name": "StikiEditState",
+        "size": 4,
+        "type": "struct"
+    },
+    {
+        "data": [
+            {
+                "name": "previousOwner",
+                "type": "felt"
+            },
+            {
+                "name": "newOwner",
+                "type": "felt"
+            }
+        ],
+        "keys": [],
+        "name": "OwnershipTransferred",
+        "type": "event"
+    },
+    {
+        "data": [
+            {
+                "name": "previous_stiki_admin",
+                "type": "felt"
+            },
+            {
+                "name": "new_stiki_admin",
+                "type": "felt"
+            }
+        ],
+        "keys": [],
+        "name": "stiki_admin_set",
+        "type": "event"
+    },
+    {
+        "data": [
+            {
+                "name": "caller_address",
+                "type": "felt"
+            },
+            {
+                "name": "stiki_hash",
+                "type": "Uint256"
+            }
+        ],
+        "keys": [],
+        "name": "upvoted",
+        "type": "event"
+    },
+    {
+        "data": [
+            {
+                "name": "caller_address",
+                "type": "felt"
+            },
+            {
+                "name": "stiki_hash",
+                "type": "Uint256"
+            }
+        ],
+        "keys": [],
+        "name": "downvoted",
+        "type": "event"
+    },
+    {
+        "inputs": [
+            {
+                "name": "game_address",
+                "type": "felt"
+            }
+        ],
+        "name": "stiki",
+        "outputs": [
+            {
+                "name": "stiki_hash",
+                "type": "Uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "game_address",
+                "type": "felt"
+            }
+        ],
+        "name": "stiki_edit_state",
+        "outputs": [
+            {
+                "name": "stiki_edit_state",
+                "type": "StikiEditState"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "stiki_owner",
+        "outputs": [
+            {
+                "name": "stiki_owner",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "game_address",
+                "type": "felt"
+            }
+        ],
+        "name": "stiki_admin",
+        "outputs": [
+            {
+                "name": "stiki_admin",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "owner",
+                "type": "felt"
+            }
+        ],
+        "name": "constructor",
+        "outputs": [],
+        "type": "constructor"
+    },
+    {
+        "inputs": [
+            {
+                "name": "game_address",
+                "type": "felt"
+            },
+            {
+                "name": "stiki_admin",
+                "type": "felt"
+            }
+        ],
+        "name": "set_stiki_admin",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "game_address",
+                "type": "felt"
+            }
+        ],
+        "name": "upvote",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "game_address",
+                "type": "felt"
+            }
+        ],
+        "name": "downvote",
+        "outputs": [],
+        "type": "function"
+    }
+]

@@ -11,6 +11,6 @@ cairo_path = ["./lib/cairo_contracts/src", "src"]
 no_color=true
 
 ["protostar.contracts"]
-main = [
-    "src/contracts/main.cairo",
+stiki = [
+    "src/contracts/stiki.cairo",
 ]
