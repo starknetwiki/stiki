@@ -19,23 +19,60 @@
     {
         "members": [
             {
-                "name": "stiki_hash",
+                "name": "previous_stiki_hash",
                 "offset": 0,
                 "type": "Uint256"
             },
             {
-                "name": "n_upvotes",
+                "name": "scholar_address",
                 "offset": 2,
                 "type": "felt"
             },
             {
-                "name": "n_downvotes",
+                "name": "w_upvotes",
                 "offset": 3,
+                "type": "felt"
+            },
+            {
+                "name": "w_downvotes",
+                "offset": 4,
                 "type": "felt"
             }
         ],
         "name": "StikiEditState",
-        "size": 4,
+        "size": 5,
+        "type": "struct"
+    },
+    {
+        "members": [
+            {
+                "name": "level",
+                "offset": 0,
+                "type": "felt"
+            },
+            {
+                "name": "xp",
+                "offset": 1,
+                "type": "felt"
+            },
+            {
+                "name": "n_edits",
+                "offset": 2,
+                "type": "felt"
+            },
+            {
+                "name": "r_upvotes",
+                "offset": 3,
+                "type": "felt"
+            },
+            {
+                "name": "r_downvotes",
+                "offset": 4,
+                "type": "felt"
+            }
+        ],
+        "name": "ScholarReputation",
+        "size": 5,
         "type": "struct"
     },
     {
@@ -71,7 +108,11 @@
     {
         "data": [
             {
-                "name": "caller_address",
+                "name": "voter_address",
+                "type": "felt"
+            },
+            {
+                "name": "scholar_address",
                 "type": "felt"
             },
             {
@@ -86,7 +127,11 @@
     {
         "data": [
             {
-                "name": "caller_address",
+                "name": "voter_address",
+                "type": "felt"
+            },
+            {
+                "name": "scholar_address",
                 "type": "felt"
             },
             {
@@ -120,6 +165,10 @@
             {
                 "name": "game_address",
                 "type": "felt"
+            },
+            {
+                "name": "stiki_hash",
+                "type": "Uint256"
             }
         ],
         "name": "stiki_edit_state",
@@ -127,6 +176,27 @@
             {
                 "name": "stiki_edit_state",
                 "type": "StikiEditState"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "game_address",
+                "type": "felt"
+            },
+            {
+                "name": "scholar_address",
+                "type": "felt"
+            }
+        ],
+        "name": "stiki_scholar_reputation",
+        "outputs": [
+            {
+                "name": "stiki_scholar_reputation",
+                "type": "ScholarReputation"
             }
         ],
         "stateMutability": "view",
@@ -192,6 +262,10 @@
             {
                 "name": "game_address",
                 "type": "felt"
+            },
+            {
+                "name": "stiki_hash",
+                "type": "Uint256"
             }
         ],
         "name": "upvote",
@@ -203,9 +277,24 @@
             {
                 "name": "game_address",
                 "type": "felt"
+            },
+            {
+                "name": "stiki_hash",
+                "type": "Uint256"
             }
         ],
         "name": "downvote",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "game_address",
+                "type": "felt"
+            }
+        ],
+        "name": "level_up",
         "outputs": [],
         "type": "function"
     }

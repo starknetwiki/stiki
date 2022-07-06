@@ -40,16 +40,16 @@ namespace StikiAccessControl:
     func set_stiki_admin{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         game_address : felt, stiki_admin : felt
     ):
-    Ownable.assert_only_owner()
-    with_attr error_message("StikiAccessControl: admin cannot be zero address"):
-        assert_not_zero(stiki_admin)
-    end
-    stiki_admin_.write(game_address, stiki_admin)
-    
-    # emit event
-    let (previous_stiki_admin) = stiki_admin_.read(game_address)
-    stiki_admin_set.emit(previous_stiki_admin, stiki_admin)
-    return ()
+        Ownable.assert_only_owner()
+        with_attr error_message("StikiAccessControl: admin cannot be zero address"):
+            assert_not_zero(stiki_admin)
+        end
+        stiki_admin_.write(game_address, stiki_admin)
+
+        # emit event
+        let (previous_stiki_admin) = stiki_admin_.read(game_address)
+        stiki_admin_set.emit(previous_stiki_admin, stiki_admin)
+        return ()
     end
 
     # --------------
@@ -65,4 +65,4 @@ namespace StikiAccessControl:
         end
         return ()
     end
-end # end namespace
+end  # end namespace
