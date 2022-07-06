@@ -1,0 +1,17 @@
+# IDE
+.vscode
+
+# Python
+__pycache__
+env
+venv
+
+# starknet 
+node.json
+*.deployments.txt
+artifacts
+goerli.accounts.json
+
+# nile
+127.0.0.1.*
+build/abi/*
