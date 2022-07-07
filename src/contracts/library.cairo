@@ -36,10 +36,9 @@ end
 func stiki_scholar_reputation_(game_address : felt, scholar_address : felt) -> (stiki_scholar_reputation : ScholarReputation):
 end
 
-# TODO: Implement check
 # Has voted for a Stiki
 @storage_var
-func has_voted_on_stiki(game_address : felt, scholar_addres : felt, stiki_hash : Uint256) -> (has_voted : felt):
+func has_voted_on_stiki_(game_address : felt, scholar_addres : felt, stiki_hash : Uint256) -> (has_voted : felt):
 end
 
 # ------
@@ -76,6 +75,13 @@ namespace Stiki:
     ) -> (stiki_scholar_reputation : ScholarReputation):
         let (stiki_scholar_reputation) = stiki_scholar_reputation_.read(game_address, scholar_address)
         return (stiki_scholar_reputation)
+    end
+
+    func has_voted_on_stiki{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+        game_address : felt, scholar_address : felt, stiki_hash : Uint256
+    ) -> (has_voted : felt):
+        let (has_voted_on_stiki) = has_voted_on_stiki_.read(game_address, scholar_address, stiki_hash)
+        return (has_voted_on_stiki)
     end
 
     func stiki_owner{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
@@ -138,6 +144,7 @@ namespace Stiki:
 
         # Update StikiEditState with weighted voting and ScholarReputation
         with vote_context:
+            internal.set_has_voted_on_stiki(game_address, edit_state.scholar_address, stiki_hash)
             internal.weighted_vote('upvote')
             stiki_edit_state_.write(game_address, stiki_hash, vote_context.edit_state)
             stiki_scholar_reputation_.write(game_address, edit_state.scholar_address, vote_context.contributor_reputation)
@@ -170,6 +177,7 @@ namespace Stiki:
 
         # Update StikiEditState with weighted voting and ScholarReputation
         with vote_context:
+            internal.set_has_voted_on_stiki(game_address, edit_state.scholar_address, stiki_hash)
             internal.weighted_vote('downvote')
             stiki_edit_state_.write(game_address, stiki_hash, vote_context.edit_state)
             stiki_scholar_reputation_.write(game_address, edit_state.scholar_address, vote_context.contributor_reputation)
@@ -202,6 +210,7 @@ namespace Stiki:
 
             # Calculate weighted vote
             # weight * 1 vote = w_vote
+            # TODO: Add more business logic
             let (w_vote) = internal.multiplier(vote_context.voter_reputation.level)
 
             # Update the following:
@@ -250,6 +259,20 @@ namespace Stiki:
                 vote_context.voter_reputation,
                 new_contributor_reputation
             )
+            return ()
+        end
+
+        func set_has_voted_on_stiki{
+            syscall_ptr : felt*,
+            pedersen_ptr : HashBuiltin*,
+            range_check_ptr
+        }(game_address : felt, scholar_address : felt, stiki_hash : Uint256):
+            let (has_voted) = has_voted_on_stiki(game_address, scholar_address, stiki_hash)
+            with_attr error_message("Stiki: has already voted"):
+                assert 0 = has_voted
+            end
+
+            has_voted_on_stiki_.write(game_address, scholar_address, stiki_hash, 1)
             return ()
         end
 

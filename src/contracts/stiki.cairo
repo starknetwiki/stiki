@@ -30,6 +30,13 @@ func stiki_scholar_reputation{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, 
 end
 
 @view
+func has_voted_on_stiki{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+    game_address : felt, scholar_address : felt, stiki_hash : Uint256
+) -> (has_voted : felt):
+    return Stiki.has_voted_on_stiki(game_address, scholar_address, stiki_hash)
+end
+
+@view
 func stiki_owner{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
     stiki_owner : felt
 ):

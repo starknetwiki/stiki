@@ -17,6 +17,9 @@ namespace IStiki:
     func stiki_scholar_reputation(game_address : felt, scholar_address : felt) -> (stiki_scholar_reputation : ScholarReputation):
     end
 
+    func has_voted_on_stiki(game_address : felt, scholar_address : felt, stiki_hash : Uint256) -> (has_voted : felt):
+    end
+
     func stiki_owner() -> (stiki_owner : felt):
     end
 

@@ -68,6 +68,7 @@ func test_upvote_per_level{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, ran
     with stiki_contract:
         test_internal.upvote_and_check_expected_per_level(
             GAME_ADDRESS,
+            # This will be incremented so it's different every time
             stiki_hash,
             # expected w_upvotes
             new (1, 1, 2, 3, 5, 8),
@@ -88,11 +89,28 @@ func test_downvote_per_level{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, r
     with stiki_contract:
         test_internal.downvote_and_check_expected_per_level(
             GAME_ADDRESS,
+            # This will be incremented so it's different every time
             stiki_hash,
             # expected w_downvotes
             new (1, 1, 2, 3, 5, 8),
             6
         )
+    end
+
+    return ()
+end
+
+@view
+func test_can_only_vote_once{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}():
+    alloc_locals
+
+    let (stiki_contract) = stiki.deployed()
+    let stiki_hash = Uint256(420, 69)
+
+    with stiki_contract:
+        stiki.upvote(GAME_ADDRESS, stiki_hash)
+        %{ expect_revert("TRANSACTION_FAILED", "Stiki: has already voted")%}
+        stiki.upvote(GAME_ADDRESS, stiki_hash)
     end
 
     return ()
