@@ -21,6 +21,7 @@ graph TD
     ```bash
     protostar install https://github.com/OpenZeppelin/cairo-contracts
     ```
+
 ## Build
 
 ```bash
@@ -31,4 +32,12 @@ make build
 
 ```bash
 make test
+```
+
+## Deploy
+
+```bash
+export PKEYADMIN=<priv_key>
+nile setup "PKEYADMIN" --network goerli 
+make deploy
 ```
