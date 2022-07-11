@@ -1,5 +1,7 @@
 # STIKI
 
+An unfinished attempt at an on-chain game wiki on starknet that rewards players in-game for their scholarship, with reward proportional to their contribution to the version of the page being upvoted. (includes WIP implementation of wiki contract and an (inefficient) implementation of an edit distance algorithm, and word tokenizer (sort of).
+
 ```mermaid
 graph TD
     A[Game Contract] --> B[Stiki Contract]
